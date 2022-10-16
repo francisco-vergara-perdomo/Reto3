@@ -1,6 +1,7 @@
 package com.eduar.misiontic.games2.controller;
 
 
+import com.eduar.misiontic.games2.entities.Admin;
 import com.eduar.misiontic.games2.entities.Games;
 import com.eduar.misiontic.games2.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,17 @@ public class GameController {
     @ResponseStatus(HttpStatus.CREATED)
     public Games save(@RequestBody Games g){
         return gameService.save(g);
+    }
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Games update(@RequestBody Games games){
+        return gameService.update(games);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable ("id")int id){
+        return gameService.delete(id);
     }
 }

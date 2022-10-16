@@ -1,5 +1,6 @@
 package com.eduar.misiontic.games2.controller;
 
+import com.eduar.misiontic.games2.entities.Admin;
 import com.eduar.misiontic.games2.entities.Category;
 import com.eduar.misiontic.games2.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,17 @@ public class CategoryController {
     @ResponseStatus(HttpStatus.CREATED)
     public Category save(@RequestBody Category p){
         return categoryService.save(p);
+    }
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Category update(@RequestBody Category category){
+        return categoryService.update(category);
+    }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable ("id")int id){
+        return categoryService.delete(id);
     }
 }
 

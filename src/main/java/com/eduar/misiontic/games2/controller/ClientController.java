@@ -1,6 +1,7 @@
 package com.eduar.misiontic.games2.controller;
 
 
+import com.eduar.misiontic.games2.entities.Admin;
 import com.eduar.misiontic.games2.entities.Client;
 import com.eduar.misiontic.games2.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,16 @@ public class ClientController {
         return clientService.save(c);
     }
 
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Client update(@RequestBody Client client){
+        return clientService.update(client);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable ("id")int id){
+        return clientService.deleteClient(id);
+    }
 
 }

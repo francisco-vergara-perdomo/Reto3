@@ -1,6 +1,7 @@
 package com.eduar.misiontic.games2.controller;
 
 
+import com.eduar.misiontic.games2.entities.Admin;
 import com.eduar.misiontic.games2.entities.Message;
 import com.eduar.misiontic.games2.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,17 @@ public class MessageController {
     @ResponseStatus(HttpStatus.CREATED)
     public Message save(@RequestBody Message p){
         return messageService.save(p);
+    }
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Message update(@RequestBody Message message){
+        return messageService.update(message);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable ("id")int id){
+        return messageService.delete(id);
     }
 }

@@ -42,6 +42,12 @@ public class MessageService {
                 if (p.getMessageText() != null) {
                     q.get().setMessageText(p.getMessageText());
                 }
+                if (p.getGame() != null) {
+                    q.get().setGame(p.getGame());
+                }
+                if (p.getClient() != null) {
+                    q.get().setClient(p.getClient());
+                }
                 messageRepository.save(q.get());
                 return q.get();
             } else {

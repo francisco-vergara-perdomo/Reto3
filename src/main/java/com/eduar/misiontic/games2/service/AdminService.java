@@ -47,6 +47,9 @@ public class AdminService {
                 if(admin.getName()!=null){
                     g.get().setName(admin.getName());
                 }
+                if(admin.getEmail()!=null){
+                    g.get().setEmail(admin.getEmail());
+                }
                 return adminRepository.save(g.get());
             }
         }
