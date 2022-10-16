@@ -1,9 +1,7 @@
 package com.eduar.misiontic.games2.service;
 
 import com.eduar.misiontic.games2.entities.Category;
-import com.eduar.misiontic.games2.entities.Product;
 import com.eduar.misiontic.games2.repository.CategoryRepository;
-import com.eduar.misiontic.games2.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

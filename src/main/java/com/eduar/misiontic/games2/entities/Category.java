@@ -1,24 +1,24 @@
 package com.eduar.misiontic.games2.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.w3c.dom.stylesheets.LinkStyle;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "category")
+@Table(name ="category")
 public class Category implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "category")
-    @JsonIgnoreProperties("category")
-    private List<Product> products;
+    @JsonIgnoreProperties({"category","game"})
+    private List<Games> games;
+
 
     public Integer getId() {
         return id;
@@ -36,11 +36,14 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public List<Product> getProducts() {
-        return products;
+
+    public List<Games> getGames() {
+        return games;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setGames(List<Games> games) {
+        this.games = games;
     }
 }
+
+
