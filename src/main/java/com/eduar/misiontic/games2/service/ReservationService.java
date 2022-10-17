@@ -3,11 +3,17 @@ package com.eduar.misiontic.games2.service;
 
 
 import com.eduar.misiontic.games2.entities.Reservation;
+import com.eduar.misiontic.games2.entities.custom.CountClient;
+import com.eduar.misiontic.games2.entities.custom.StatusAmount;
 import com.eduar.misiontic.games2.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,6 +83,33 @@ public class ReservationService {
         }).orElse(false);
         return aBoolean;
     }
+    public List<CountClient> getTopClient() {
+        return reservationRepository.getTopClient();
+    }
+
+    public StatusAmount getStatusReport() {
+        List<Reservation> completed = reservationRepository.getReservationsByDescription("completed");
+        List<Reservation> cancelled = reservationRepository.getReservationsByDescription("cancelled");
+        StatusAmount statusAmount = new StatusAmount(completed.size(), cancelled.size());
+        return statusAmount;
+    }
+
+    public List<Reservation> getReservationPeriod(String startDateString, String devolutionDateString) {
 
 
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate = new Date();
+        Date devolutionDate = new Date();
+        try {
+            startDate = parser.parse(startDateString);
+            devolutionDate = parser.parse(devolutionDateString);
+        } catch (ParseException e) {
+        }
+        if (startDate.before(devolutionDate)) {
+            return reservationRepository.getReservationsPeriod(startDate, devolutionDate);
+        }
+        return new ArrayList<>();
+
+
+    }
 }

@@ -3,6 +3,8 @@ package com.eduar.misiontic.games2.controller;
 
 import com.eduar.misiontic.games2.entities.Admin;
 import com.eduar.misiontic.games2.entities.Reservation;
+import com.eduar.misiontic.games2.entities.custom.CountClient;
+import com.eduar.misiontic.games2.entities.custom.StatusAmount;
 import com.eduar.misiontic.games2.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,4 +42,20 @@ public class ReservationController {
     public boolean delete(@PathVariable ("id")int id){
         return reservationService.deleteReservation(id);
     }
+
+    @GetMapping("/report-status")
+       public StatusAmount getReservationAmount(){
+        return reservationService.getStatusReport();
+    }
+
+    @GetMapping("/report-clients")
+    public List<CountClient> getCountClient(){
+        return reservationService.getTopClient();
+    }
+
+    @GetMapping("report-dates/{startDate}/{devolutionDate}")
+    public List<Reservation> getReservationReport(@PathVariable("startDate") String startDateString, @PathVariable("devolutionDate") String devolutionDateString) {
+        return reservationService.getReservationPeriod(startDateString, devolutionDateString);
+    }
+
 }
